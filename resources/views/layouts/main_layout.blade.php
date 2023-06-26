@@ -48,38 +48,41 @@
                     <span>Dashboard</span></a>
             </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
+            <!-- Nav Item - Charts -->
+            @can('start absensi')
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ Route('absensi') }}">
+                        <i class="fas fa-fw fa-user-check"></i>
+                        <span>Absensi</span></a>
+                </li>
+            @endcan
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ Route('absensi') }}">
-                    <i class="fas fa-fw fa-user-check"></i>
-                    <span>Absensi</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ Route('rekapan_sementara') }}">
-                    <i class="fa-solid fa-book"></i>
-                    <span>Rekapan Sementara</span>
-                </a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+            @can('read rekapan sementara')
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ Route('rekapan_sementara') }}">
+                        <i class="fa-solid fa-book"></i>
+                        <span>Rekapan Sementara</span>
+                    </a>
+                </li>
+            @endcan
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ Route('rekapan_tetap') }}">
-                    <i class="fa-solid fa-flag"></i>
-                    <span>Rekapan Tetap</span>
-                </a>
-            </li>
+            @can('read rekapan tetap')
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ Route('rekapan_tetap') }}">
+                        <i class="fa-solid fa-flag"></i>
+                        <span>Rekapan Tetap</span>
+                    </a>
+                </li>
+            @endcan
+
 
             <!-- Nav Item - Tables
             <li class="nav-item">
@@ -127,6 +130,19 @@
                             <span class="mr-2 d-none d-lg-inline text-gray-600 medium">Terakhir Login : <span
                                     class="text-success">{{ Session::get('admin_last_login') }}</span></span>
                         </li>
+                        <li class="nav align-items-center ml-2">
+                            <div class="dropdown">
+                                <a class="btn btn-light dropdown-toggle" href="#" role="button"
+                                    id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    Bahasa
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="locale/en">Inggris</a>
+                                    <a class="dropdown-item" href="locale/id">Indonesia</a>
+                                </div>
+                            </div>
+                        </li>
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
@@ -136,7 +152,7 @@
                                 <span
                                     class="mr-2 d-none d-lg-inline text-gray-600 medium">{{ Session::get('admin_user_name') }}</span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/{{ Session::get('admin_user_foto') }}">
+                                    src="{{ asset('img/' . Session::get('admin_user_foto')) }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -150,7 +166,8 @@
                                     Setting
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="" data-toggle="modal"
+                                    data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -230,7 +247,7 @@
 
         <!-- Bootstrap core JavaScript-->
         <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
         <!-- Core plugin JavaScript-->
         <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>

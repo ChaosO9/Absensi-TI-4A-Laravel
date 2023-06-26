@@ -15,9 +15,9 @@
     <div class="container">
         <div class="row justify-content-center form-login mt-5">
             <div class="col-md-6">
-                <form action="{{ route('login') }}" class="panel" method="post">
+                <form action="{{ route('login_mahasiswa') }}" class="panel" method="post">
                     @csrf
-                    <h3 class="mb-4 text-center text-uppercase">Login Sistem Absensi TI 4A</h3>
+                    <h3 class="mb-4 text-center text-uppercase">Login Mahasiswa Absen TI 4A</h3>
                     @if (Session::has('failed'))
                         <div class="alert alert-danger mr-5 ml-5 radius" role="alert">
                             {{ Session::get('failed') }}
@@ -33,10 +33,6 @@
                     </div>
                     <div class="form-group mt-4 ml-5 mr-5">
                         <button type="submit" class="btn btn-info btn-login block radius" name="login">Login</button>
-                    </div>
-                    <div class="form-group mt-4 ml-5 mr-5">
-                        <a href="{{ route('registrasiadmin') }}" class="btn btn-info btn-regis block radius"
-                            role="button">Registrasi</a>
                     </div>
                 </form>
             </div>

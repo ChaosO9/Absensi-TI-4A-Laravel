@@ -23,7 +23,6 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->string('last_login')->nullable();
-            $table->enum('roles', ['Admin-Mahasiswa', 'Mahasiswa']);
         });
     }
 

@@ -9,13 +9,6 @@ use Illuminate\Support\Facades\Session;
 
 class index extends Controller
 {
-    public function indexAction(Request $request){
-        if(Session::has('login') && session('login')){
-            return $this->indexView();
-        }else{
-            return redirect()->route('login');
-        }
-    }
     public function indexView(){
         $jumlah_matkul = matkul::all()->count();
         $jumlah_mahasiswa = mahasiswa::all()->count();

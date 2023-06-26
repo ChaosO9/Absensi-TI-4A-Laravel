@@ -33,7 +33,7 @@ class Mahasiswa_admin extends Model
         }
     }
 
-    public static function data_admin($nim, $email){
+    public static function data_admin_dan_mahasiswa($nim, $email){
         $result = DB::table('users')
         ->join('mahasiswa', 'users.nim', '=', 'mahasiswa.nim')
         ->join('akun_mahasiswa', 'users.nim', '=', 'akun_mahasiswa.nim')

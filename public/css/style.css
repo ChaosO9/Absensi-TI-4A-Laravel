@@ -73,3 +73,9 @@ img:hover {
     background-color: green;
     color: white;
 }
+
+.required-field-indicator {
+    color: red;
+    font-size: 1.2em;
+    margin-left: 5px;
+}

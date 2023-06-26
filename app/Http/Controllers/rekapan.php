@@ -10,9 +10,7 @@ use Illuminate\Support\Facades\Session;
 class rekapan extends Controller
 {
     public function rekapan_sementaraAction(){
-        if(!Session::has('login') && !session('login')){
-            return redirect()->route('login');
-        }
+        $this->authorize('read rekapan sementara');
 
         $data_matkul = matkul::all();
         $data_mahasiswa = mahasiswa::all();
@@ -24,9 +22,7 @@ class rekapan extends Controller
     }
 
     public function rekapan_tetapAction(){
-        if(!Session::has('login') && !session('login')){
-            return redirect()->route('login');
-        }
+        $this->authorize('read rekapan tetap');
 
         $data_matkul = matkul::all();
         $data_mahasiswa = mahasiswa::all();

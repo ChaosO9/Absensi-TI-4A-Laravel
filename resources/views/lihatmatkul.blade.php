@@ -29,12 +29,13 @@
                             <tbody align="center">
                                 @foreach ($data_matkul as $data)
                                     <tr>
-                                        <td><?= $i++ ?></td>
-                                        <td><?= $data->id_matkul ?></td>
-                                        <td><?= $data->nama_matkul ?></td>
-                                        <td><?= $data->jenis_matkul ?></td>
-                                        <td><?= $data->nama_dosen ?></td>
-                                        <td><a href="#" class="btn btn-success btn-icon-split" data-toggle="tooltip"
+                                        <td class="align-middle text-center"><?= $i++ ?></td>
+                                        <td class="align-middle text-center"><?= $data->id_matkul ?></td>
+                                        <td class="align-middle text-center"><?= $data->nama_matkul ?></td>
+                                        <td class="align-middle text-center"><?= $data->jenis_matkul ?></td>
+                                        <td class="align-middle text-center"><?= $data->nama_dosen ?></td>
+                                        <td class="align-middle text-center"><a href="#"
+                                                class="btn btn-success btn-icon-split" data-toggle="tooltip"
                                                 data-placement="top" title="Detail?">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-user"></i>

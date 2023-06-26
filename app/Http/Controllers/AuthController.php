@@ -20,6 +20,10 @@ class AuthController extends Controller
         return view('login');
     }
 
+    public function viewLoginmhs(){
+        return view('login_mahasiswa');
+    }
+
     public function registerAdmin(Request $request){
         // $request->validate([
         //     'nim' => 'required',
@@ -73,24 +77,28 @@ class AuthController extends Controller
 
         $credentials[$field] = $NimOrEmail;
         unset($credentials['email_or_nim']);
+        $user = User::role('Super Admin')->where($field , $NimOrEmail);
 
         if (Auth::attempt($credentials)){
-            $data_admins = Mahasiswa_admin::data_admin($credentials[$field], $email);
-            foreach($data_admins as $data_admin){
-            session(['admin_id' => $data_admin->id]);
-            session(['admin_user_email'=> $data_admin->email]);
-            session(['admin_user_name' => $data_admin->nama]);
-            session(['admin_user_foto' => $data_admin->foto]);
-            session(['admin_last_login' => $data_admin->last_login]);
-            session(['qr_created' => false]);
-            session(['login' => true]);
-            session(['end_session_time' => '']);
-            session(['session_time' => '']);
-            session(['hash' => '']);
-            session(['date' => '']);
-            session(['clearCountdown' => true]);
+            if($user){
+                $data_users_admins = Mahasiswa_admin::data_admin_dan_mahasiswa($credentials[$field], $email);
+                session(['qr_created' => false]);
+                session(['end_session_time' => '']);
+                session(['session_time' => '']);
+                session(['hash' => '']);
+                session(['date' => '']);
+                session(['clearCountdown' => true]);
+            }else{
+                $data_users_admins = Mahasiswa_admin::data_admin_dan_mahasiswa($credentials[$field], $email);
             }
 
+            foreach($data_users_admins as $data_admin){
+                session(['admin_id' => $data_admin->id]);
+                session(['admin_user_email'=> $data_admin->email]);
+                session(['admin_user_name' => $data_admin->nama]);
+                session(['admin_user_foto' => $data_admin->foto]);
+                session(['admin_last_login' => $data_admin->last_login]);
+            }
             return redirect() -> route('index');
         }
 
