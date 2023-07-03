@@ -10,11 +10,12 @@ use Illuminate\Support\Facades\Redirect;
 class absensi extends Controller
 {
     //
-    public function __construct(){
-        $this->authorize('start absensi');
-    }
+    // public function __construct(){
+    //     $this->authorize('start absensi');
+    // }
 
     public function absensiAction(){
+        $this->authorize('start absensi');
         $data_matkul = matkul::all();
         return view('absensi', [
             'data_matkul' => $data_matkul,

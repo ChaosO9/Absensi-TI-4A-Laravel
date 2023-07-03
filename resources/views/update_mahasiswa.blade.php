@@ -14,21 +14,22 @@
                 </div>
                 @if (Session::has('error'))
                     <div class="alert alert-danger mt-5 mr-5 ml-5 radius" role="alert">
-                        {{ Session::get('error') }}
+                        {{ __(Session::get('error')) }}
                     </div>
                 @endif
                 @if (Session::has('success'))
                     <div class="alert alert-info mt-5 mr-5 ml-5 radius" role="alert">
-                        {!! Session::get('success') !!}
+                        {!! __(Session::get('success')) !!}
                     </div>
                 @endif
                 @if (Session::has('success2'))
                     <div class="alert alert-info mt-1 mr-5 ml-5 radius" role="alert">
-                        {!! Session::get('success2') !!}
+                        {!! __(Session::get('success2')) !!}
                     </div>
                     <div class="mt-2 ml-2 mr-5">
                         <div class="d-flex justify-content-between">
-                            <a href="{{ Route('lihatmhs') }}" class="btn btn-info block radius ml-auto">Kembali</a>
+                            <a href="{{ Route('lihatmhs') }}"
+                                class="btn btn-info block radius ml-auto">{{ __('Kembali') }}</a>
                         </div>
                     </div>
                 @endif
@@ -38,65 +39,56 @@
                         @csrf
                         <div class="form-group">
                             <div class="form-group ml-2 mr-5">
-                                <label for="nim" class="form-label text-dark ml-2" style="font-size: 23px">Nomor Induk
-                                    Mahasiswa</label>
+                                <label for="nim" class="form-label text-dark ml-2"
+                                    style="font-size: 23px">{{ __('Nomor Induk Mahasiswa') }}</label>
                                 <input type="text" name="nim" id="nim"
-                                    class="form-control form-control-lg radius" placeholder="Contoh: 216151001"
+                                    class="form-control form-control-lg radius" placeholder="{{ __('Contoh') }}: 216151001"
                                     value="{{ $nim }}" readonly required>
                                 <div class="invalid-feedback">
-                                    NIM harus diisi!
+                                    {{ __('NIM harus diisi!') }}
                                 </div>
                             </div>
                             <div class="form-group ml-2 mr-5">
-                                <label for="nama" class="form-label text-dark ml-2" style="font-size: 23px">Nama</label>
+                                <label for="nama" class="form-label text-dark ml-2"
+                                    style="font-size: 23px">{{ __('Nama') }}</label>
                                 <input type="text" name="nama" id="nama"
-                                    class="form-control form-control-lg radius" placeholder="Contoh: Andika Saputra"
-                                    value="{{ $nama }}" required>
+                                    class="form-control form-control-lg radius"
+                                    placeholder="{{ __('Contoh') }}: Andika Saputra" value="{{ $nama }}" required>
                                 <div class="invalid-feedback">
-                                    Nama harus diisi!
+                                    {{ __('Nama harus diisi!') }}
                                 </div>
                             </div>
                             <div class="form-group ml-2 mr-5">
-                                <label for="nomor_absen" class="form-label text-dark ml-2" style="font-size: 23px">Nomor
-                                    Absen</label>
+                                <label for="nomor_absen" class="form-label text-dark ml-2"
+                                    style="font-size: 23px">{{ __('Nomor Absen') }}</label>
                                 <input type="number" name="nomor_absen" id="nomor_absen" step="1" min="1"
                                     class="form-control form-control-lg radius" placeholder="1" value="{{ $nomor_absen }}"
                                     required>
                                 <div class="invalid-feedback">
-                                    Nomor Absen harus diisi!
+                                    {{ __('Nomor Absen harus diisi!') }}
                                 </div>
                             </div>
                             <div class="form-group ml-2 mr-5">
                                 <label for="jenis_kelamin" class="form-label text-dark ml-2" style="font-size: 23px">
-                                    Jenis Kelamin</label>
+                                    {{ __('Jenis Kelamin') }}</label>
                                 <select name="jenis_kelamin" id="jenis_kelamin"
                                     class="form-control custom-select custom-select-lg radius" required>
                                     <option value="Laki-laki" {{ $jenis_kelamin == 'Laki-laki' ? 'selected' : '' }}>
-                                        Laki-laki
+                                        {{ __('Laki-laki') }}
                                     </option>
                                     <option value="Perempuan" {{ $jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>
-                                        Perempuan</option>
+                                        {{ __('Perempuan') }}</option>
                                 </select>
                                 <div class="invalid-feedback">
-                                    Pilih jenis kelamin!
+                                    {{ __('Pilih jenis kelamin!') }}
                                 </div>
                             </div>
                             <div class="form-group ml-2 mr-5">
-                                <label for="photo" class="form-label text-dark ml-2" style="font-size: 23px">Upload
-                                    Foto</label><br>
+                                <label for="photo" class="form-label text-dark ml-2"
+                                    style="font-size: 23px">{{ __('Unggah Foto') }}</label><br>
                                 <img class="ml-2" id="preview" src="{{ asset('img/' . $foto) }}" alt="Selected Photo"
                                     style="max-width: 100%; height: 150px;">
                             </div>
-                            {{-- <div class="form-group ml-2 mr-5">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input custom-file-input-lg" id="photo"
-                                        accept="image/*" onchange="previewPhoto(event)" required>
-                                    <label class="custom-file-label" for="photo">Choose file...</label>
-                                    <div class="invalid-feedback">
-                                        Foto harus diupload!
-                                    </div>
-                                </div>
-                            </div> --}}
                             <div class="form-group ml-2 mr-5">
                                 <input type="file" name="photo" id="photo"
                                     class="form-control form-control-file form-control-lg radius" accept=".jpg, .png, .gif"
@@ -105,12 +97,12 @@
                             </div>
                             <div class="mt-4 ml-2 mr-5">
                                 <div class="d-flex justify-content-between">
-                                    <button type="submit" class="btn btn-primary block radius mr-3" name="submit">Update
-                                        Data</button>
+                                    <button type="submit" class="btn btn-primary block radius mr-3"
+                                        name="submit">{{ __('Perbarui Data') }}</button>
                                     <button type="button" class="btn btn-danger block radius" data-toggle="modal"
-                                        data-target="#deleteModal">Hapus
-                                        Data</button>
-                                    <a href="{{ Route('lihatmhs') }}" class="btn btn-info block radius ml-auto">Batal</a>
+                                        data-target="#deleteModal">{{ __('Hapus Data') }}</button>
+                                    <a href="{{ Route('lihatmhs') }}"
+                                        class="btn btn-info block radius ml-auto">{{ __('Batal') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -124,17 +116,18 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Yakin ingin menghapus data?</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">{{ __('Yakin ingin menghapus data?') }}</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">Pilih Hapus untuk menghapus data</div>
+                    <div class="modal-body">{{ __('Pilih Hapus untuk menghapus data') }}</div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+                        <button class="btn btn-secondary" type="button"
+                            data-dismiss="modal">{{ __('Batal') }}</button>
                         <form action="{{ Route('hapus_mahasiswa', ['nim' => $nim]) }}" method="POST">
                             @csrf
-                            <button class="btn btn-danger" type="submit">Hapus</button>
+                            <button class="btn btn-danger" type="submit">{{ __('Hapus') }}</button>
                         </form>
                     </div>
                 </div>

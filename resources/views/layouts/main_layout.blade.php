@@ -1,4 +1,9 @@
-@include('logic.date_indo')
+{{-- @php
+    $jsonSTringTranslations = file_get_contents(asset('lang/en.json'));
+    $translations = json_decode($jsonSTringTranslations, true);
+    echo var_dump($translations);
+@endphp --}}
+@include('logic.date')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{{ $title }} | Absensi Kelas TI 4A</title>
+    <title>{{ __('Title ~ Absensi Kelas TI 4A', ['title' => __($title)]) }}</title>
 
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
@@ -35,7 +40,7 @@
                 <div class="sidebar-brand-icon">
                     <i class="fas fa-university"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Kelas TI 4A</div>
+                <div class="sidebar-brand-text mx-3">{{ __('Kelas TI 4A') }}</div>
             </a>
 
             <!-- Divider -->
@@ -45,7 +50,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ Route('index') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>{{ __('Dashboard') }}</span></a>
             </li>
 
             <!-- Nav Item - Charts -->
@@ -55,7 +60,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ Route('absensi') }}">
                         <i class="fas fa-fw fa-user-check"></i>
-                        <span>Absensi</span></a>
+                        <span>{{ __('Absensi') }}</span></a>
                 </li>
             @endcan
 
@@ -66,7 +71,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ Route('rekapan_sementara') }}">
                         <i class="fa-solid fa-book"></i>
-                        <span>Rekapan Sementara</span>
+                        <span>{{ __('Rekapan Sementara') }}</span>
                     </a>
                 </li>
             @endcan
@@ -78,7 +83,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ Route('rekapan_tetap') }}">
                         <i class="fa-solid fa-flag"></i>
-                        <span>Rekapan Tetap</span>
+                        <span>{{ __('Rekapan Tetap') }}</span>
                     </a>
                 </li>
             @endcan
@@ -118,7 +123,8 @@
 
                     <ul class="navbar-nav mr-auto">
                         <li class="nav align-items-center">
-                            <span class="ml-2 d-none d-lg-inline text-gray-600 medium">Hari / Tanggal : <span
+                            <span
+                                class="ml-2 d-none d-lg-inline text-gray-600 medium">{{ __('Hari / Tanggal : ') }}<span
                                     class="text-success" id="clock">{{ Session::get('date') }}</span></span>
                         </li>
                     </ul>
@@ -127,7 +133,8 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav align-items-center">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 medium">Terakhir Login : <span
+                            <span
+                                class="mr-2 d-none d-lg-inline text-gray-600 medium">{{ __('Terakhir Login : ') }}<span
                                     class="text-success">{{ Session::get('admin_last_login') }}</span></span>
                         </li>
                         <li class="nav align-items-center ml-2">
@@ -135,11 +142,18 @@
                                 <a class="btn btn-light dropdown-toggle" href="#" role="button"
                                     id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
-                                    Bahasa
+                                    <img src="{{ asset('img/asset/worldwide.png') }}" alt=""
+                                        style="max-width: 20px; height:auto;" class="mr-2">{{ __('Bahasa') }}
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="locale/en">Inggris</a>
-                                    <a class="dropdown-item" href="locale/id">Indonesia</a>
+                                    <a class="dropdown-item" href="locale/id"><img
+                                            src="{{ asset('img/asset/indonesia_flag.png') }}" class="mr-2 mb-2"
+                                            alt=""
+                                            style="max-width: 20px; height:auto;">{{ __('Indonesia') }}</a>
+                                    <a class="dropdown-item" href="locale/en"><img
+                                            src="{{ asset('img/asset/united_kingdom_flag.png') }}"
+                                            style="max-width: 20px; height:auto;" class="mr-2"
+                                            alt="">{{ __('Inggris') }}</a>
                                 </div>
                             </div>
                         </li>
@@ -157,19 +171,21 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="#" data-toggle="modal"
+                                    data-target="#comingModal">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profil
+                                    {{ __('Profil') }}
                                 </a>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="" data-toggle="modal"
+                                    data-target="#comingModal">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Setting
+                                    {{ __('Pengaturan') }}
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="" data-toggle="modal"
                                     data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    {{ __('Keluar') }}
                                 </a>
                             </div>
                         </li>
@@ -187,7 +203,7 @@
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; TI 4A {{ Session::get('admin_user_name') }}</span>
+                            <span>{{ __('Hak Cipta') }} &copy; TI 4A {{ Session::get('admin_user_name') }}</span>
                         </div>
                     </div>
                 </footer>
@@ -210,12 +226,12 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Coming Soon</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">{{ __('Segera Datang') }}</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">Fitur ini masih belum aktif</div>
+                    <div class="modal-body">{{ __('Fitur ini masih belum aktif') }}</div>
                     <div class="modal-footer">
                         <button class="btn btn-primary" type="button" data-dismiss="modal">Oke</button>
                     </div>
@@ -228,17 +244,17 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Yakin ingin keluar ?</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">{{ __('Yakin ingin keluar ?') }}</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">Pilih Logout untuk keluar</div>
+                    <div class="modal-body">{{ __('Pilih Keluar untuk keluar') }}</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button class="btn btn-primary" type="submit">Logout</button>
+                            <button class="btn btn-primary" type="submit">{{ __('Keluar') }}</button>
                         </form>
                     </div>
                 </div>

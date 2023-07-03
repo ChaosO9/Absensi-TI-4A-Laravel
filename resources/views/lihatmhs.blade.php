@@ -5,12 +5,12 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-4 text-gray-800">Lihat Mahasiswa </h1>
+        <h1 class="h3 mb-4 text-gray-800">{{ __('Lihat Mahasiswa') }}</h1>
         <div class="col-md-12">
             <!-- DataTales -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Daftar Mahassiwa</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">{{ __('Daftar Mahasiswa') }}</h6>
                 </div>
                 <div class="card-body">
                     @if (Session::has('deleted'))
@@ -25,7 +25,7 @@
                                 <i class="fas fa-user"></i>
                                 <i class="fa-solid fa-plus"></i>
                             </span>
-                            <span class="text">Tambah Mahasiswa</span>
+                            <span class="text">{{ __('Tambah Mahasiswa') }}</span>
                         </a>
                         <hr>
                     @endcan
@@ -33,14 +33,14 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr align="center">
-                                    <th>No</th>
-                                    <th>Profil</th>
-                                    <th>NIM</th>
-                                    <th>Nomor Absen</th>
-                                    <th>Nama</th>
-                                    <th>Jenis Kelamin</th>
+                                    <th>{{ __('No') }}</th>
+                                    <th>{{ __('Profil') }}</th>
+                                    <th>{{ __('NIM') }}</th>
+                                    <th>{{ __('Nomor Absen') }}</th>
+                                    <th>{{ __('Nama') }}</th>
+                                    <th>{{ __('Jenis Kelamin') }}</th>
                                     @can('update mahasiswa')
-                                        <th>Aksi</th>
+                                        <th>{{ __('Aksi') }}</th>
                                     @endcan
                                 </tr>
                             </thead>
@@ -68,14 +68,14 @@
                                         <td class="align-middle text-center"><?= $data->nim ?></td>
                                         <td class="align-middle text-center"><?= $data->nomor_absen ?></td>
                                         <td class="align-middle text-center"><?= $data->nama ?></td>
-                                        <td class="align-middle text-center"><?= $data->jeniskelamin ?></td>
+                                        <td class="align-middle text-center"> {{ __($data->jeniskelamin) }} </td>
                                         @can('update mahasiswa')
                                             <td>
                                                 <a href="{{ $url }}" class="btn btn-success btn-icon-split">
                                                     <span class="icon text-white-50">
                                                         <i class="fas fa-user"></i>
                                                     </span>
-                                                    <span class="text">Update Data</span>
+                                                    <span class="text">{{ __('Perbarui Data') }}</span>
                                                 </a>
                                             </td>
                                         @endcan

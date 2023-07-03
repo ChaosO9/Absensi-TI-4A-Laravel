@@ -5,12 +5,12 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-4 text-gray-800">Tambah Mahasiswa</h1>
+        <h1 class="h3 mb-4 text-gray-800">{{ __('Tambah Mahasiswa') }}</h1>
         <div class="col-md-12">
             <!-- DataTales -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Form Tambah Mahassiwa</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">{{ __('Form Tambah Mahasiswa') }}</h6>
                 </div>
                 @if (Session::has('error'))
                     <div class="alert alert-danger mt-5 mr-5 ml-5 radius" role="alert">
@@ -28,47 +28,48 @@
                         @csrf
                         <div class="form-group">
                             <div class="form-group ml-2 mr-5">
-                                <label for="nim" class="form-label text-dark ml-2" style="font-size: 23px">Nomor Induk
-                                    Mahasiswa</label>
+                                <label for="nim" class="form-label text-dark ml-2"
+                                    style="font-size: 23px">{{ __('Nomor Induk Mahasiswa') }}</label>
                                 <input type="text" name="nim" id="nim"
                                     class="form-control form-control-lg radius" placeholder="Contoh: 216151001" required>
                                 <div class="invalid-feedback">
-                                    NIM harus diisi!
+                                    {{ __('NIM harus diisi!') }}
                                 </div>
                             </div>
                             <div class="form-group ml-2 mr-5">
-                                <label for="nama" class="form-label text-dark ml-2" style="font-size: 23px">Nama</label>
+                                <label for="nama" class="form-label text-dark ml-2"
+                                    style="font-size: 23px">{{ __('Nama') }}</label>
                                 <input type="text" name="nama" id="nama"
                                     class="form-control form-control-lg radius" placeholder="Contoh: Andika Saputra"
                                     required>
                                 <div class="invalid-feedback">
-                                    Nama harus diisi!
+                                    {{ __('Nama harus diisi!') }}
                                 </div>
                             </div>
                             <div class="form-group ml-2 mr-5">
-                                <label for="nomor_absen" class="form-label text-dark ml-2" style="font-size: 23px">Nomor
-                                    Absen</label>
+                                <label for="nomor_absen" class="form-label text-dark ml-2"
+                                    style="font-size: 23px">{{ __('Nomor Absen') }}</label>
                                 <input type="number" name="nomor_absen" id="nomor_absen" value="1" step="1"
                                     min="1" class="form-control form-control-lg radius" placeholder="1" required>
                                 <div class="invalid-feedback">
-                                    Nomor Absen harus diisi!
+                                    {{ __('Nomor Absen harus diisi!') }}
                                 </div>
                             </div>
                             <div class="form-group ml-2 mr-5">
                                 <label for="jenis_kelamin" class="form-label text-dark ml-2" style="font-size: 23px">
-                                    Jenis Kelamin</label>
+                                    {{ __('Jenis Kelamin') }}</label>
                                 <select name="jenis_kelamin" id="jenis_kelamin"
                                     class="form-control custom-select custom-select-lg radius" required>
-                                    <option value="Laki-laki" selected>Laki-laki</option>
-                                    <option value="Perempuan">Perempuan</option>
+                                    <option value="Laki-laki" selected>{{ __('Laki-laki') }}</option>
+                                    <option value="Perempuan">{{ __('Perempuan') }}</option>
                                 </select>
                                 <div class="invalid-feedback">
-                                    Pilih jenis kelamin!
+                                    {{ __('Pilih jenis kelamin!') }}
                                 </div>
                             </div>
                             <div class="form-group ml-2 mr-5">
-                                <label for="photo" class="form-label text-dark ml-2" style="font-size: 23px">Upload
-                                    Foto</label><br>
+                                <label for="photo" class="form-label text-dark ml-2"
+                                    style="font-size: 23px">{{ __('Unggah Foto') }}</label><br>
                                 <img class="ml-2" id="preview" src="{{ asset('img/placeholder.jpg') }}"
                                     alt="Selected Photo" style="max-width: 100%; height: 150px;">
                             </div>
@@ -86,6 +87,9 @@
                                 <input type="file" name="photo" id="photo"
                                     class="form-control form-control-file form-control-lg radius" accept="image/*"
                                     onchange="previewPhoto(event)" required>
+                                <div class="invalid-feedback">
+                                    {{ __('Unggah berkas foto profil!') }}
+                                </div>
                             </div>
                             <div class="form-group mt-4 ml-2 mr-5">
                                 <button type="submit" class="btn btn-primary block radius" name="submit">Submit</button>

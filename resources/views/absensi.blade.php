@@ -52,21 +52,21 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="mb-5 text-gray-800">Absensi</h1>
+        <h1 class="mb-5 text-gray-800">{{ __('Absensi') }}</h1>
         <div class="row">
             <!-- Collapsable Card Example -->
             <div class="col-xl-4 col-md-4 animated--fade-in">
                 <div class="card shadow mb-4">
                     <!-- Card Header - Accordion -->
                     <a class="d-block card-header py-3" role="button" aria-expanded="true" aria-controls="absen">
-                        <h6 class="m-0 font-weight-bold text-primary">Menu Memulai Sesi</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">{{ __('Menu Memulai Sesi') }}</h6>
                     </a>
                     <!-- Card Content - Collapse -->
                     <div class="card-body">
                         <form id="myForm" role="form" action="" method="post" name="postform">
                             @csrf
                             <div class="form-group">
-                                <label for="matkul">Mata Kuliah</label>
+                                <label for="matkul">{{ __('mata kuliah') }}</label>
                                 <select id="matkul" class="form-control" name="matkul">
                                     @foreach ($data_matkul as $data)
                                         <option value='{{ $data->id_matkul }}'> {{ $data->nama_matkul }} </option>
@@ -74,8 +74,7 @@
                                 </select>
                             </div>
                             <button type="submit" name="submit" id="submit" class="btn btn-primary"
-                                {{ Session::get('hash') == '' ? '' : 'disabled' }}>Buka
-                                Sesi</button>
+                                {{ Session::get('hash') == '' ? '' : 'disabled' }}>{{ __('Buka Sesi') }}</button>
                         </form>
                     </div>
                 </div>
@@ -84,12 +83,12 @@
                 <div class="card shadow mb-4">
                     <!-- Card Header - Accordion -->
                     <a class="d-block card-header w-100 py-3" role="button" aria-expanded="true" aria-controls="absen">
-                        <h6 class="m-0 font-weight-bold text-primary">Scan QR</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">{{ __('Pindai QR') }}</h6>
                     </a>
                     <!-- Card Content - Collapse -->
                     <div class="card-body">
-                        <p>Pastikan Anda membuka sesi matkul dengan benar dan pastikan menekan tombol "Buka
-                            Sesi" sebelum Scan QR!</p>
+                        <p>{{ __('Pastikan Anda membuka sesi matkul dengan benar dan pastikan menekan tombol "Buka Sesi" sebelum memindai QR!') }}
+                        </p>
                         <img id="gambar_qr" class="img img-fluid w-25" @php $url_image = qrUrl(); @endphp
                             src="{{ $url_image }}" alt="" title="" />
                         @php
@@ -99,10 +98,10 @@
                             echo $disableSubmitButton;
                         @endphp
                         <hr>
-                        <div>Waktu Sesi Absensi Akan Berakhir dalam:</div>
+                        <div>{{ __('Waktu Sesi Absensi Akan Berakhir dalam:') }}</div>
                         <div id="countdown">00:00</div>
                         @if (request()->has('matkul'))
-                            <p>Absensi Matkul Dipilih: {{ request()->query('matkul') }}</p>
+                            <p>{{ __('Absensi Matkul Dipilih:') }} {{ request()->query('matkul') }}</p>
                         @endif
                     </div>
                 </div>
@@ -111,6 +110,7 @@
     </div>
     <!-- /.container-fluid -->
     </div>
-    <script id="indexUrl" src="{{ asset('js/custom/absensi.js') }}" data-route="{{ Route('absensi_refreshed') }}"></script>
+    <script id="indexUrl" src="{{ asset('js/custom/absensi.js') }}" data-route="{{ Route('absensi_refreshed') }}">
+    </script>
     <!-- End of Main Content -->
 @endsection

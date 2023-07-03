@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -25,13 +26,24 @@ class AuthController extends Controller
     }
 
     public function registerAdmin(Request $request){
-        // $request->validate([
-        //     'nim' => 'required',
-        //     'email' => 'required',
-        //     'password' => 'required',
-        //     'password2' => 'required',
-        //     'token' => 'required'
-        // ]);
+        $validator = Validator::make($request->all(), [
+            'nim' => 'required',
+            'password' => 'required|min:8',
+            'password2' => 'required',
+            'token' => 'required'
+        ], [
+            'nim.required' => 'NIM perlu diisi!',
+            'password.required' => 'Kata sandi perlu diisi!',
+            'password.min' => 'Kata sandi minimal delapan karakter!',
+            'password2.required' => 'Konfirmasi kata sandi perlu diisi!',
+            'token' => 'Token perlu diisi!',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         $user = new User();
 
@@ -47,10 +59,10 @@ class AuthController extends Controller
         $token = $request->token;
 
         if($token != 'ADMINJUJUR!'){
-            Cache::put('failed', 'Token yang dimasukkan salah', 2);
+            Cache::put('failed', 'Token yang dimasukkan salah!', 2);
             return redirect('registrasiadmin');
         }else if($password != $password_confirmation){
-            Cache::put('failed', 'Password yang dimasukkan salah', 2);
+            Cache::put('failed', 'Password yang dimasukkan salah!', 2);
             return redirect('registrasiadmin');
         }else if($admin_data -> isEmpty() || $admin_data === null){
             Cache::put('failed', 'Anda tidak terdaftar sebagai mahasiswa TI 4A!', 2);
