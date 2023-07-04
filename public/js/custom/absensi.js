@@ -54,3 +54,24 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('countdown').textContent = formatTime(countdownValue);
     }
 });
+
+function localizationIcon(id){
+    $(document).ready(function() {
+        var langIcon = document.getElementById('langIcon');
+        var lang = document.getElementById('lang');
+        var IdIcon = document.getElementById('IdIcon');
+        var EnIcon = document.getElementById('EnIcon');
+
+        if (id === 1){
+            langIcon.src = IdIcon.src;
+            const translatedValue = lang.dataset.lang;
+            lang.textContent = translatedValue;
+            $('#IdLink').addClass('active');
+        } else if(id === 2){
+            langIcon.src = EnIcon.src;
+            const translatedValue = lang.dataset.lang2;
+            lang.textContent = translatedValue;
+            $('#EnLink').addClass('active');
+        }
+    });
+}

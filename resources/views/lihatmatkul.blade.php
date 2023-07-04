@@ -22,7 +22,9 @@
                                     <th class="align-middle text-center">{{ __('Nama Matkul') }}</th>
                                     <th class="align-middle text-center">{{ __('Jenis Matkul') }}</th>
                                     <th class="align-middle text-center">{{ __('Dosen Pengampu') }}</th>
-                                    <th class="align-middle text-center">{{ __('Aksi') }}</th>
+                                    @can('update matkul')
+                                        <th class="align-middle text-center">{{ __('Aksi') }}</th>
+                                    @endcan
                                 </tr>
                             </thead>
                             <?php $i = 1; ?>
@@ -34,14 +36,16 @@
                                         <td class="align-middle text-center"><?= $data->nama_matkul ?></td>
                                         <td class="align-middle text-center"><?= $data->jenis_matkul ?></td>
                                         <td class="align-middle text-center"><?= $data->nama_dosen ?></td>
-                                        <td class="align-middle text-center"><a href="#"
-                                                class="btn btn-success btn-icon-split" data-toggle="tooltip"
-                                                data-placement="top" title="Detail?">
-                                                <span class="icon text-white-50">
-                                                    <i class="fas fa-book"></i>
-                                                </span>
-                                                <span class="text">{{ __('Lihat Detail') }}</span>
-                                            </a></td>
+                                        @can('update matkul')
+                                            <td class="align-middle text-center"><a href="#"
+                                                    class="btn btn-success btn-icon-split" data-toggle="tooltip"
+                                                    data-placement="top" title="Detail?">
+                                                    <span class="icon text-white-50">
+                                                        <i class="fas fa-book"></i>
+                                                    </span>
+                                                    <span class="text">{{ __('Lihat Detail') }}</span>
+                                                </a></td>
+                                        @endcan
                                     </tr>
                                 @endforeach
                             </tbody>

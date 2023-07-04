@@ -24,6 +24,7 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://kit.fontawesome.com/1423de5ca4.js" crossorigin="anonymous"></script>
     <script src="{{ asset('js/custom/absensi.js') }}"></script>
 </head>
@@ -142,19 +143,33 @@
                                 <a class="btn btn-light dropdown-toggle" href="#" role="button"
                                     id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
-                                    <img src="{{ asset('img/asset/worldwide.png') }}" alt=""
-                                        style="max-width: 20px; height:auto;" class="mr-2">{{ __('Bahasa') }}
+                                    <!-- Store the asset path in a hidden input field -->
+                                    <img id="langIcon" src="{{ asset('img/asset/worldwide.png') }}" alt=""
+                                        style="max-width: 20px; height:auto;" class="mr-2"><span id="lang"
+                                        data-lang="{{ __('Indonesia') }}"
+                                        data-lang2="{{ __('Inggris') }}">{{ __('Bahasa') }}</span>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="locale/id"><img
+                                    <a id="IdLink" class="dropdown-item" href="locale/id"><img id="IdIcon"
                                             src="{{ asset('img/asset/indonesia_flag.png') }}" class="mr-2 mb-2"
                                             alt=""
                                             style="max-width: 20px; height:auto;">{{ __('Indonesia') }}</a>
-                                    <a class="dropdown-item" href="locale/en"><img
+                                    <a id="EnLink" class="dropdown-item" href="locale/en"><img id="EnIcon"
                                             src="{{ asset('img/asset/united_kingdom_flag.png') }}"
                                             style="max-width: 20px; height:auto;" class="mr-2"
                                             alt="">{{ __('Inggris') }}</a>
                                 </div>
+                                @php
+                                    if (Session::get('locale') == 'id') {
+                                        echo '<script>
+                                            localizationIcon(1)
+                                        </script>';
+                                    } else {
+                                        echo '<script>
+                                            localizationIcon(2)
+                                        </script>';
+                                    }
+                                @endphp
                             </div>
                         </li>
                         <div class="topbar-divider d-none d-sm-block"></div>
@@ -276,7 +291,6 @@
 
         <!-- Custom scripts for all pages-->
         <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
-
 </body>
 
 </html>
