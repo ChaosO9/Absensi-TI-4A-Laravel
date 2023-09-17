@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\jadwal;
 use App\Models\matkul;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -17,7 +18,34 @@ class absensi extends Controller
     public function absensiAction(){
         $this->authorize('start absensi');
         $data_matkul = matkul::all();
+
+        date_default_timezone_set('Asia/Singapore');
+        $timestamp = time();
+        $englishDay = date('l', $timestamp);
+
+        $data_jadwal = Jadwal::select('jadwal.*', 'matkul.nama_matkul', 'matkul.id_dosen', 'dosen.nama_dosen')
+        ->join('matkul', 'jadwal.id_matkul', '=', 'matkul.id_matkul')
+        ->join('dosen', 'matkul.id_dosen', '=', 'dosen.kode_dosen')
+        ->where('jadwal.hari', $englishDay)
+        ->get();
+
+
+        $jadwal_jam = [];
+        foreach ($data_jadwal as $d){
+            $parts_mulai = explode(':', $d->mulai);
+            $parts_akhir = explode(':', $d->akhir);
+            $hour_mulai = $parts_mulai[0];
+            $minute_mulai = $parts_mulai[1];
+            $hour_akhir = $parts_akhir[0];
+            $minute_akhir = $parts_akhir[1];
+            $jam = $hour_mulai . '.' . $minute_mulai . ' - ' . $hour_akhir . '.' . $minute_akhir;
+            array_push($jadwal_jam, $jam);
+        }
+
+
         return view('absensi', [
+            'jadwal_jam' => $jadwal_jam,
+            'data_jadwal' => $data_jadwal,
             'data_matkul' => $data_matkul,
             'title' => 'Absensi'
         ]);
@@ -38,7 +66,7 @@ class absensi extends Controller
 
                 // SQL Session Process
                 // $sql_sesi = mysqli_query($koneksi, "INSERT INTO log_sesi (waktu_sesi, id_matkul, kode) VALUES
-// ('$_SESSION['session_time']', '$selectedOption', '$hash2')");
+                // ('$_SESSION['session_time']', '$selectedOption', '$hash2')");
 
                 // Session ended
                 $end_time = strtotime('+1 minutes', $timestamp_);
